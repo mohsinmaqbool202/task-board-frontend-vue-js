@@ -26,6 +26,8 @@
         :errors="errors"
       />
       <FormButton type="submit">Login</FormButton>
+      <!-- <p class="forgot-password">Forgot password?</p> -->
+      <p class="register-link">Don't have an account? <router-link to="/register">Register</router-link></p>
     </Form>
   </GuestLayout>
 </template>
