@@ -7,7 +7,7 @@ const routes = [
             title: 'Sign Up',
             requiresAuth: false
         },
-        path: '/register',
+        path: '/auth/register',
         name: 'register',
         component: () => import('@/views/auth/Register.vue')
     },
@@ -16,9 +16,27 @@ const routes = [
             title: 'Login',
             requiresAuth: false
         },
-        path: '/login',
+        path: '/auth/login',
         name: 'login',
         component: () => import('@/views/auth/Login.vue')
+    },
+    {
+        meta: {
+            title: 'Forgot Password',
+            requiresAuth: false
+        },
+        path: '/auth/forgot-password',
+        name: 'forgot-password',
+        component: () => import('@/views/auth/ForgotPassword.vue')
+    },
+    {
+        meta: {
+            title: 'Reset Password',
+            requiresAuth: false
+        },
+        path: '/auth/reset-password',
+        name: 'reset-password',
+        component: () => import('@/views/auth/ResetPassword.vue')
     },
 
     // authenticated routes

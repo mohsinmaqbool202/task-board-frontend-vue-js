@@ -1,6 +1,6 @@
 <template>
   <GuestLayout>
-    <h2 class="title">Login</h2>
+    <h2 class="title">Forgot Password</h2>
     <Form
       class="form"
       @submit="submit"
@@ -16,18 +16,10 @@
         :schema="schema"
         :errors="errors"
       />
-      <FormInput
-        v-model="form.password"
-        type="password"
-        name="password"
-        placeholder="Password"
-        autocomplete="current-password"
-        :schema="schema"
-        :errors="errors"
-      />
-      <FormButton type="submit">Login</FormButton>
-      <p class="register-link">Don't have an account? <router-link to="/auth/register">Register</router-link></p>
-      <p class="forgot-password">Forgot password? <router-link to="/auth/forgot-password">Reset password</router-link></p>
+      <FormButton type="submit">Send Reset Link</FormButton>
+      <p class="login-link">
+        Back to <router-link to="/auth/login">Login</router-link>
+      </p>
     </Form>
   </GuestLayout>
 </template>
@@ -35,32 +27,28 @@
 <script setup>
 import { ref, reactive } from "vue";
 import { Form } from "vee-validate";
-import { useRouter } from 'vue-router'
-import { login } from "@/services/auth";
-import { useAuthStore } from '@/stores/auth'
 import GuestLayout from "@/layouts/GuestLayout.vue";
 import FormInput from "@/components/form/FormInput.vue";
 import FormButton from "@/components/form/FormButton.vue";
+import { sendResetLink } from "@/services/auth";
 import { notify } from "@kyvg/vue3-notification";
-
-const router = useRouter()
-const authStore = useAuthStore()
 
 const form = reactive({
   email: "",
-  password: "",
 });
+
 const schema = ref({
   email: "required|email",
-  password: "required",
 });
 
 const submit = () => {
-  login(form)
-    .then(({ data }) => {
-      authStore.setUserData(data);
-      router.push("/");
+  sendResetLink(form).then(() => {
+    notify({
+      title: "Reset link sent",
+      text: "Check your email for the reset link",
+      type: "success",
     });
+  });
 };
 </script>
 
@@ -76,10 +64,4 @@ const submit = () => {
   flex-direction: column;
   gap: 1rem;
 }
-
-.forgot-password {
-  margin-top: 1rem;
-  text-align: center;
-}
-
 </style>

@@ -31,7 +31,7 @@ function toggleDropdown() {
 
 function logout() {
   authStore.clearUserData();
-  router.push('/login');
+  router.push('/auth/login');
 }
 </script>
 

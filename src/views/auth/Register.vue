@@ -36,7 +36,7 @@
           :errors="errors"
         />
         <FormButton type="submit">Sign Up</FormButton>
-        <p class="login-link">Already have an account? <router-link to="/login">Login</router-link></p>
+        <p class="login-link">Already have an account? <router-link to="/auth/login">Login</router-link></p>
       </Form>
     </div>
     <VerifyEmail v-else />
