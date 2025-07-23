@@ -7,7 +7,7 @@
       :validation-schema="schema"
       v-slot="{ errors }"
     >
-      <FormControl
+      <FormInput
         v-model="form.email"
         type="email"
         name="email"
@@ -16,7 +16,7 @@
         :schema="schema"
         :errors="errors"
       />
-      <FormControl
+      <FormInput
         v-model="form.password"
         type="password"
         name="password"
@@ -26,7 +26,6 @@
         :errors="errors"
       />
       <FormButton type="submit">Login</FormButton>
-      <!-- <p class="forgot-password">Forgot password?</p> -->
       <p class="register-link">Don't have an account? <router-link to="/register">Register</router-link></p>
     </Form>
   </GuestLayout>
@@ -39,7 +38,7 @@ import { useRouter } from 'vue-router'
 import { login } from "@/services/auth";
 import { useAuthStore } from '@/stores/auth'
 import GuestLayout from "@/layouts/GuestLayout.vue";
-import FormControl from "@/components/form/FormControl.vue";
+import FormInput from "@/components/form/FormInput.vue";
 import FormButton from "@/components/form/FormButton.vue";
 import { notify } from "@kyvg/vue3-notification";
 

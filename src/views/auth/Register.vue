@@ -8,7 +8,7 @@
         :validation-schema="schema"
         v-slot="{ errors }"
       >
-        <FormControl
+        <FormInput
           v-model="form.name"
           type="text"
           name="name"
@@ -17,7 +17,7 @@
           :schema="schema"
           :errors="errors"
         />
-        <FormControl
+        <FormInput
           v-model="form.email"
           type="email"
           name="email"
@@ -26,7 +26,7 @@
           :schema="schema"
           :errors="errors"
         />
-        <FormControl
+        <FormInput
           v-model="form.password"
           type="password"
           name="password"
@@ -51,7 +51,7 @@ import { register } from "@/services/auth";
 import { useAuthStore } from "@/stores/auth";
 import VerifyEmail from "@/views/auth/VerifyEmail.vue";
 import GuestLayout from "@/layouts/GuestLayout.vue";
-import FormControl from "@/components/form/FormControl.vue";
+import FormInput from "@/components/form/FormInput.vue";
 import FormButton from "@/components/form/FormButton.vue";
 
 const authStore = useAuthStore();
