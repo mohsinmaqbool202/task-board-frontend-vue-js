@@ -38,10 +38,11 @@ import { Form } from "vee-validate";
 import { useRouter } from 'vue-router'
 import { login } from "@/services/auth";
 import { useAuthStore } from '@/stores/auth'
+import { useLoaderStore } from "@/stores/loader";
 import GuestLayout from "@/layouts/GuestLayout.vue";
 import FormInput from "@/components/form/FormInput.vue";
 import FormButton from "@/components/form/FormButton.vue";
-import { notify } from "@kyvg/vue3-notification";
+
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -56,10 +57,13 @@ const schema = ref({
 });
 
 const submit = () => {
+  useLoaderStore().loading = true
   login(form)
     .then(({ data }) => {
       authStore.setUserData(data);
       router.push("/");
+    }).finally(() => {
+      useLoaderStore().loading = false
     });
 };
 </script>

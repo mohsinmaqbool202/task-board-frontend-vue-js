@@ -56,6 +56,7 @@ import { ref, reactive } from "vue";
 import { Form } from "vee-validate";
 import { register } from "@/services/auth";
 import { useAuthStore } from "@/stores/auth";
+import { useLoaderStore } from "@/stores/loader";
 import GuestLayout from "@/layouts/GuestLayout.vue";
 import FormInput from "@/components/form/FormInput.vue";
 import FormButton from "@/components/form/FormButton.vue";
@@ -77,8 +78,11 @@ const schema = ref({
 });
 
 const submit = () => {
+  useLoaderStore().loading = true
   register(form).then(() => {
     isRegistered.value = true;
+  }).finally(() => {
+    useLoaderStore().loading = false
   });
 };
 </script>

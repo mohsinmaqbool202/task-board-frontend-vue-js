@@ -8,6 +8,11 @@
         </tr>
       </thead>
       <tbody>
+        <tr v-if="data.length === 0">
+          <td :colspan="columns.length + ($slots.actions ? 1 : 0)" style="text-align: center;">
+            {{ noDataText }}
+          </td>
+        </tr>
         <tr v-for="row in data" :key="row.id">
           <td v-for="col in columns" :key="col.key">{{ row[col.key] }}</td>
           <td v-if="$slots.actions" class="actions-cell">
@@ -22,7 +27,11 @@
 <script setup>
 defineProps({
   columns: Array,
-  data: Array
+  data: Array,
+  noDataText: {
+    type: String,
+    default: "No data found."
+  }
 })
 </script>
 

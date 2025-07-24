@@ -46,6 +46,7 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
+import { useLoaderStore } from "@/stores/loader";
 import { notify } from "@kyvg/vue3-notification";
 import Table from "@/components/common/Table.vue";
 import Heading from "@/components/common/Heading.vue";
@@ -72,8 +73,11 @@ onMounted(async () => {
 });
 
 async function loadData() {
+  useLoaderStore().loading = true
   await getUsers().then((response) => {
     users.value = formatUsersData(response.data);
+  }).finally(() => {
+    useLoaderStore().loading = false
   });
 }
 
@@ -99,12 +103,15 @@ function handleDelete(user) {
 }
 
 async function handleInvite(user) {
+  useLoaderStore().loading = true
   await sendInvite(user.id).then(() => {
     notify({
       title: "Invite Sent",
       text: "Invite sent to user successfully",
       type: "success",
     });
+  }).finally(() => {
+    useLoaderStore().loading = false
   });
 }
 

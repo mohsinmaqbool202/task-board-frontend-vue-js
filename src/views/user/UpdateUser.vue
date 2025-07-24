@@ -56,6 +56,7 @@ import { Form } from "vee-validate";
 import { ref, reactive, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { notify } from "@kyvg/vue3-notification";
+import { useLoaderStore } from "@/stores/loader";
 import { updateUser, getUser } from "@/services/users";
 import Heading from "@/components/common/Heading.vue";
 import FormInput from "@/components/form/FormInput.vue";
@@ -83,14 +84,18 @@ const roles = [
 ];
 
 onMounted(() => {
+  useLoaderStore().loading = true
   getUser(route.params.id).then(({ data }) => {
     form.name = data.name;
     form.email = data.email;
     form.role = data.role.name;
+  }).finally(() => {
+    useLoaderStore().loading = false
   });
 });
 
 const submit = () => {
+  useLoaderStore().loading = true
   updateUser(route.params.id, form).then(({ data }) => {
     notify({
       title: "User updated",
@@ -98,6 +103,8 @@ const submit = () => {
       type: "success",
     });
     router.push("/users");
+  }).finally(() => {
+    useLoaderStore().loading = false
   });
 };
 </script>

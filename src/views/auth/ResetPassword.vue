@@ -36,13 +36,14 @@
 <script setup>
 import { ref, reactive } from "vue";
 import { Form } from "vee-validate";
-import { useRouter } from "vue-router";
 import { useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import { resetPassword } from "@/services/auth";
+import { notify } from "@kyvg/vue3-notification";
+import { useLoaderStore } from "@/stores/loader";
 import GuestLayout from "@/layouts/GuestLayout.vue";
 import FormInput from "@/components/form/FormInput.vue";
 import FormButton from "@/components/form/FormButton.vue";
-import { notify } from "@kyvg/vue3-notification";
 
 const router = useRouter();
 const route = useRoute();
@@ -58,6 +59,7 @@ const schema = ref({
 });
 
 const submit = () => {
+  useLoaderStore().loading = true
   resetPassword(form).then(() => {
     notify({
       type: "success",
@@ -65,6 +67,8 @@ const submit = () => {
       text: "Your password has been set successfully",
     });
     router.push("/auth/login");
+  }).finally(() => {
+    useLoaderStore().loading = false
   });
 };
 </script>

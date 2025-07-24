@@ -56,15 +56,16 @@
 </template>
 
 <script setup>
+import { ref, reactive } from "vue";
 import { Form } from "vee-validate";
+import { useRouter } from "vue-router";
+import { createUser } from "@/services/users";
+import { notify } from "@kyvg/vue3-notification";
+import { useLoaderStore } from "@/stores/loader";
 import Heading from "@/components/common/Heading.vue";
 import FormInput from "@/components/form/FormInput.vue";
 import FormButton from "@/components/form/FormButton.vue";
 import AuthenticatedLayout from "@/layouts/AuthenticatedLayout.vue";
-import { ref, reactive } from "vue";
-import { createUser } from "@/services/users";
-import { useRouter } from "vue-router";
-import { notify } from "@kyvg/vue3-notification";
 
 const router = useRouter();
 
@@ -86,6 +87,7 @@ const roles = [
 ];
 
 const submit = () => {
+  useLoaderStore().loading = true
   createUser(form)
     .then(({ data }) => {
         notify({
@@ -94,8 +96,10 @@ const submit = () => {
             type: "success",
         });
       router.push("/users");
+    }).finally(() => {
+      useLoaderStore().loading = false
     });
-};
+};  
 
 </script>
 
