@@ -3,103 +3,112 @@ import { notify } from "@kyvg/vue3-notification";
 
 const routes = [
   // guest routes
-    {
-        meta: {
-            title: 'Sign Up',
-            requiresAuth: false
-        },
-        path: '/auth/register',
-        name: 'register',
-        component: () => import('@/views/auth/Register.vue')
+  {
+    meta: {
+      title: 'Sign Up',
+      requiresAuth: false
     },
-    {
-        meta: {
-            title: 'Login',
-            requiresAuth: false
-        },
-        path: '/auth/login',
-        name: 'login',
-        component: () => import('@/views/auth/Login.vue')
+    path: '/auth/register',
+    name: 'register',
+    component: () => import('@/views/auth/Register.vue')
+  },
+  {
+    meta: {
+      title: 'Login',
+      requiresAuth: false
     },
-    {
-        meta: {
-            title: 'Forgot Password',
-            requiresAuth: false
-        },
-        path: '/auth/forgot-password',
-        name: 'forgot-password',
-        component: () => import('@/views/auth/ForgotPassword.vue')
+    path: '/auth/login',
+    name: 'login',
+    component: () => import('@/views/auth/Login.vue')
+  },
+  {
+    meta: {
+      title: 'Forgot Password',
+      requiresAuth: false
     },
-    {
-        meta: {
-            title: 'Reset Password',
-            requiresAuth: false
-        },
-        path: '/auth/reset-password',
-        name: 'reset-password',
-        component: () => import('@/views/auth/ResetPassword.vue')
+    path: '/auth/forgot-password',
+    name: 'forgot-password',
+    component: () => import('@/views/auth/ForgotPassword.vue')
+  },
+  {
+    meta: {
+      title: 'Reset Password',
+      requiresAuth: false
     },
-    {
-        meta: {
-            title: 'Accept Invite',
-            requiresAuth: false
-        },
-        path: '/auth/set-password',
-        name: 'set-password',
-        component: () => import('@/views/auth/ResetPassword.vue')
+    path: '/auth/reset-password',
+    name: 'reset-password',
+    component: () => import('@/views/auth/ResetPassword.vue')
+  },
+  {
+    meta: {
+      title: 'Accept Invite',
+      requiresAuth: false
     },
+    path: '/auth/set-password',
+    name: 'set-password',
+    component: () => import('@/views/auth/ResetPassword.vue')
+  },
+  {
+    meta: {
+      title: 'Verify Email',
+      requiresAuth: false
+    },
+    path: '/auth/verify-email',
+    name: 'verify-email',
+    component: () => import('@/views/auth/VerifyEmail.vue')
+  },
 
-    // authenticated routes
-    {
-      meta: {
-        title: 'Home',
-        requiresAuth: true,
-        roles: ['admin', 'manager', 'member']
-      },
-      path: '/',
-      name: 'home',
-      component: () => import('@/views/Home.vue')
+  // authenticated routes
+  {
+    meta: {
+      title: 'Home',
+      requiresAuth: true,
+      roles: ['admin', 'manager', 'member']
     },
-    {
-      meta: {
-        title: 'Users',
-        requiresAuth: true,
-        roles: ['admin']
-      },
-      path: '/users',
-      name: 'users',
-      component: () => import('@/views/user/Users.vue')
+    path: '/',
+    name: 'home',
+    component: () => import('@/views/Home.vue')
+  },
+  {
+    meta: {
+      title: 'Users',
+      requiresAuth: true,
+      roles: ['admin']
     },
-    {
-      meta: {
-        title: 'Create User',
-        requiresAuth: true,
-        roles: ['admin']
-      },
-      path: '/users/create',
-      name: 'create-user',
-      component: () => import('@/views/user/CreateUser.vue')
+    path: '/users',
+    name: 'users',
+    component: () => import('@/views/user/Users.vue')
+  },
+  {
+    meta: {
+      title: 'Create User',
+      requiresAuth: true,
+      roles: ['admin']
     },
-    {
-      meta: {
-        title: 'Update User',
-        requiresAuth: true,
-        roles: ['admin']
-      },
-      path: '/users/:id/edit',
-      name: 'update-user',
-      component: () => import('@/views/user/UpdateUser.vue')
+    path: '/users/create',
+    name: 'create-user',
+    component: () => import('@/views/user/CreateUser.vue')
+  },
+  {
+    meta: {
+      title: 'Update User',
+      requiresAuth: true,
+      roles: ['admin']
     },
+    path: '/users/:id/edit',
+    name: 'update-user',
+    component: () => import('@/views/user/UpdateUser.vue')
+  },
 
-    // fallback route
-    {
-        meta: {
-            title: 'PageNotFound',
-        },
-        path: "/:pathMatch(.*)*",
-        name: "PageNotFound",
-        component: () => import('@/views/404/PageNotFound.vue')
+  // fallback route
+  {
+    meta: {
+      title: 'PageNotFound',
     },
+    path: "/:pathMatch(.*)*",
+    name: "PageNotFound",
+    component: () => import('@/views/404/PageNotFound.vue')
+  },
 ];
 
 const router = createRouter({

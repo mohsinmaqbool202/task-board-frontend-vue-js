@@ -46,11 +46,11 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
-import Table from "@/components/common/Table.vue";
 import { notify } from "@kyvg/vue3-notification";
+import Table from "@/components/common/Table.vue";
 import Heading from "@/components/common/Heading.vue";
-import { getUsers, deleteUser, sendInvite } from "@/services/users";
 import FormButton from "@/components/form/FormButton.vue";
+import { getUsers, deleteUser, sendInvite } from "@/services/users";
 import AuthenticatedLayout from "@/layouts/AuthenticatedLayout.vue";
 import ConfirmationModal from "@/components/common/ConfirmationModal.vue";
 

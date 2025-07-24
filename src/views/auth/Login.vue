@@ -1,6 +1,6 @@
 <template>
   <GuestLayout>
-    <h2 class="title">Login</h2>
+    <h2 style="text-align: center;">Login</h2>
     <Form
       class="form"
       @submit="submit"
@@ -65,15 +65,4 @@ const submit = () => {
 </script>
 
 <style scoped>
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
-}
-
-.forgot-password {
-  margin-top: 1rem;
-  text-align: center;
-}
-
 </style>

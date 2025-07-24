@@ -36,20 +36,26 @@
           :errors="errors"
         />
         <FormButton type="submit">Sign Up</FormButton>
-        <p class="login-link">Already have an account? <router-link to="/auth/login">Login</router-link></p>
+        <p class="login-link">
+          Already have an account?
+          <router-link to="/auth/login">Login</router-link>
+        </p>
       </Form>
     </div>
-    <VerifyEmail v-else />
+    <div v-else>
+      <h2>Verify Your Email</h2>
+      <p>
+        Please check your inbox and click the verification link we sent you.
+      </p>
+    </div>
   </GuestLayout>
 </template>
 
 <script setup>
 import { ref, reactive } from "vue";
 import { Form } from "vee-validate";
-import { useRouter } from "vue-router";
 import { register } from "@/services/auth";
 import { useAuthStore } from "@/stores/auth";
-import VerifyEmail from "@/views/auth/VerifyEmail.vue";
 import GuestLayout from "@/layouts/GuestLayout.vue";
 import FormInput from "@/components/form/FormInput.vue";
 import FormButton from "@/components/form/FormButton.vue";
@@ -78,15 +84,4 @@ const submit = () => {
 </script>
 
 <style scoped>
-.title {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  color: #333;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: .5rem;
-}
 </style>
