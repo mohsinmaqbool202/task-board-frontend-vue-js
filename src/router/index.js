@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { notify } from "@kyvg/vue3-notification";
 
 const routes = [
   // guest routes
@@ -38,16 +39,56 @@ const routes = [
         name: 'reset-password',
         component: () => import('@/views/auth/ResetPassword.vue')
     },
+    {
+        meta: {
+            title: 'Accept Invite',
+            requiresAuth: false
+        },
+        path: '/auth/set-password',
+        name: 'set-password',
+        component: () => import('@/views/auth/ResetPassword.vue')
+    },
 
     // authenticated routes
     {
       meta: {
         title: 'Home',
-        requiresAuth: true
+        requiresAuth: true,
+        roles: ['admin', 'manager', 'member']
       },
       path: '/',
       name: 'home',
       component: () => import('@/views/Home.vue')
+    },
+    {
+      meta: {
+        title: 'Users',
+        requiresAuth: true,
+        roles: ['admin']
+      },
+      path: '/users',
+      name: 'users',
+      component: () => import('@/views/user/Users.vue')
+    },
+    {
+      meta: {
+        title: 'Create User',
+        requiresAuth: true,
+        roles: ['admin']
+      },
+      path: '/users/create',
+      name: 'create-user',
+      component: () => import('@/views/user/CreateUser.vue')
+    },
+    {
+      meta: {
+        title: 'Update User',
+        requiresAuth: true,
+        roles: ['admin']
+      },
+      path: '/users/:id/edit',
+      name: 'update-user',
+      component: () => import('@/views/user/UpdateUser.vue')
     },
 
     // fallback route
@@ -70,8 +111,11 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const { title, requiresAuth } = to.meta;
+  const { title, requiresAuth, roles } = to.meta;
   const token = localStorage.getItem('token');
+
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const userRole = user.role;
 
   if (title === 'PageNotFound') {
     return next();
@@ -82,7 +126,15 @@ router.beforeEach((to, from, next) => {
   }
 
   if (!requiresAuth && token) {
-    console.log('token', token);
+    return next({ name: 'home' });
+  }
+
+  if (roles && !roles.includes(userRole)) {
+    notify({
+      type: 'error',
+      title: 'Unauthorized',
+      text: 'You are not authorized to access this page'
+    })
     return next({ name: 'home' });
   }
 

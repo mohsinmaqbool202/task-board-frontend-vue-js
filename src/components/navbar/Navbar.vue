@@ -6,7 +6,7 @@
     </div>
     <div class="navbar-menu">
       <div class="dropdown" @click="toggleDropdown">
-        <span class="dropdown-toggle">Menu ▼</span>
+        <span class="dropdown-toggle">{{ authStore.user.name }} ▼</span>
         <div v-if="dropdownOpen" class="dropdown-menu">
           <a href="#" @click.prevent="logout">Logout</a>
         </div>

@@ -94,7 +94,7 @@ const controlIconH = computed(() => (props.type === 'textarea' ? 'h-full' : 'h-1
 </script>
 
 <template>
-  <div class="relative">
+  <!-- <div class="relative"> -->
     <Field
       :type="!selectable && type !== 'textarea' ? type : null"
       :id="name"
@@ -110,12 +110,13 @@ const controlIconH = computed(() => (props.type === 'textarea' ? 'h-full' : 'h-1
       </template>
     </Field>
     <span class="text-red-500">{{ errors[name] }}</span>
-  </div>
+  <!-- </div> -->
 </template>
 
 <style scoped>
-input {
-    padding: 0.75rem;
+input,select {
+    box-sizing: border-box;
+    padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 8px;
     font-size: 1rem;
@@ -130,7 +131,16 @@ input {
     color: red;
     font-size: 12px;
 }
-input:focus {
+input:focus, select:focus {
     border-color: #3b82f6;
+}
+::placeholder {
+  font-size: 12px;
+}
+
+input,
+select,
+select option {
+  font-size: 12px;
 }
 </style>

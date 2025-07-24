@@ -37,8 +37,8 @@ const handleException = (error) => {
 
   if (status == 401) {
     detail = error.response.data.message;
-    authStore.clearUserData()
-    router.push('/auth/login')
+    // authStore.clearUserData()
+    // router.push('/auth/login')
   }
   else if (status == 500) {
     detail = 'Something went wrong'

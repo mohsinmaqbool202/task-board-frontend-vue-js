@@ -1,6 +1,6 @@
 <template>
   <GuestLayout>
-    <h2 class="title">Forgot Password</h2>
+    <h2 class="title">Set your password</h2>
     <Form
       class="form"
       @submit="submit"
@@ -25,7 +25,7 @@
         :schema="schema"
         :errors="errors"
       />
-      <FormButton type="submit">Reset Password</FormButton>
+      <FormButton type="submit">Set Password</FormButton>
       <p class="login-link">
         Back to <router-link to="/auth/login">Login</router-link>
       </p>
@@ -60,9 +60,9 @@ const schema = ref({
 const submit = () => {
   resetPassword(form).then(() => {
     notify({
-      title: "Password reset",
-      text: "Your password has been reset",
       type: "success",
+      title: "Password set",
+      text: "Your password has been set successfully",
     });
     router.push("/auth/login");
   });
@@ -79,6 +79,6 @@ const submit = () => {
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: .5rem;
 }
 </style>

@@ -24,3 +24,4 @@ export async function resetPassword(payload) {
   const response = await axiosClient.post('/auth/set-password', payload)
   return response.data
 }
+

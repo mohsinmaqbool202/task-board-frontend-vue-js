@@ -2,29 +2,17 @@
   <div class="guest-layout">
     <Navbar />
     <div class="main-content">
-      <Sidebar
-        :items="sidebarItems"
-        :selected="selected"
-        @select="selected = $event"
-      />
+      <Sidebar/>
       <div class="content-area">
-        <slot :selected="selected" />
+        <slot />
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
 import Navbar from "@/components/navbar/Navbar.vue";
 import Sidebar from "@/components/navbar/Sidebar.vue";
-
-const selected = ref("home");
-const sidebarItems = [
-  { name: "home", label: "Home" },
-  { name: "about", label: "About" },
-  { name: "contact", label: "Contact" },
-];
 </script>
 
 <style scoped>

@@ -65,16 +65,10 @@ const submit = () => {
 </script>
 
 <style scoped>
-.title {
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
-  color: #333;
-}
-
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: .5rem;
 }
 
 .forgot-password {

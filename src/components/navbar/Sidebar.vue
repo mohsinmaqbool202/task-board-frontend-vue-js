@@ -2,10 +2,10 @@
   <aside class="sidebar">
     <ul>
       <li
-        v-for="item in items"
+        v-for="item in filteredItems"
         :key="item.name"
-        :class="{ active: selected === item.name }"
-        @click="select(item.name)"
+        :class="{ active: route.path === item.path }"
+        @click="goTo(item.path)"
       >
         {{ item.label }}
       </li>
@@ -14,16 +14,26 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from "vue";
+import { useAuthStore } from "@/stores/auth";
+import { computed } from "vue";
+import { useRouter, useRoute } from "vue-router";
 
-const props = defineProps({
-  items: Array,
-  selected: String,
-});
-const emit = defineEmits(["select"]);
+const authStore = useAuthStore();
+const router = useRouter();
+const route = useRoute();
 
-function select(name) {
-  emit("select", name);
+const sidebarItems = [
+  { name: "home", label: "Home", roles: ["admin", "manager", "member"], path: "/" },
+  { name: "users", label: "Users", roles: ["admin"], path: "/users" },
+];
+
+//only show items that the user has access to
+const filteredItems = computed(() =>
+  sidebarItems.filter(item => item.roles.includes(authStore.user?.role))
+)
+
+function goTo(path) {
+  router.push(path)
 }
 </script>
 

@@ -87,6 +87,6 @@ const submit = () => {
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: .5rem;
 }
 </style>

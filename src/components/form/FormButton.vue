@@ -1,45 +1,39 @@
 <template>
   <button
+    :class="['form-btn', variant, color]"
     :type="type"
-    class="form-button"
-    :disabled="disabled"
+    @click.stop="handleClick"
   >
     <slot />
   </button>
 </template>
 
 <script setup>
-import { defineProps } from 'vue'
+const emit = defineEmits(['click']);
 
-const props = defineProps({
-  type: {
-    type: String,
-    default: 'button',
-    validator: (value) => ['button', 'submit'].includes(value),
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
+defineProps({
+  type: { type: String, default: 'button' },
+  variant: { type: String, default: 'filled' }, 
+  color: { type: String, default: 'primary' },
 })
+
+function handleClick(event) {
+  emit('click', event);
+}
 </script>
 
 <style scoped>
-.form-button {
-  padding: 0.75rem;
+.form-btn {
+  padding: 8px 18px;
+  border-radius: 6px;
   border: none;
-  border-radius: 8px;
-  background-color: #3b82f6;
-  color: #fff;
-  font-size: 1rem;
+  font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background 0.2s, color 0.2s;
 }
-.form-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-.form-button:hover:not(:disabled) {
-  background-color: #2563eb;
-}
+.filled.primary { background: #2563eb; color: #fff; }
+.filled.danger { background: #dc2626; color: #fff; }
+.outlined.primary { background: #fff; color: #2563eb; border: 1.5px solid #2563eb; }
+.outlined.danger { background: #fff; color: #dc2626; border: 1.5px solid #dc2626; }
+.form-btn:active { opacity: 0.85; }
 </style>
